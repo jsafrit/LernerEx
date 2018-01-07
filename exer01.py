@@ -8,7 +8,7 @@ def get_trip_input():
     user_info = input('Tell me where you went: ')
     while ',' not in user_info:
         if not user_info:
-            print('Done')
+            print('Done entering places. Reporting...\n')
             return None
         print('You must enter a  "City, Country" combination.')
         user_info = input('Tell me where you went: ')
@@ -26,7 +26,7 @@ if __name__ == '__main__':
     trip_string = get_trip_input()
     while trip_string:
         entry = parse_trip(trip_string)
-        print(entry)
+        # print(entry)
         ledger[entry] = ledger.get(entry, 0) + 1
         trip_string = get_trip_input()
 
