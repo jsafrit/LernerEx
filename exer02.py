@@ -1,4 +1,4 @@
-from collections import namedtuple
+#!/env/python3
 
 
 def myrange2(first, second=None, third=1):
