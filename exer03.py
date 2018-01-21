@@ -18,20 +18,29 @@ def parse_entry(line):
     return ip, ts, req
 
 
+def parse_entry_re(line):
+    ip = line[:line.find(' ')]
+    ts = line[line.find('[')+1:line.find(']')]
+
+    start = line.find('"') + 1
+    end = line.find('"', start)
+    req = line[start:end]
+    return ip, ts, req
+
+
 if __name__ == '__main__':
-    assert(parse_entry(sample) == (ip, ts, req))
+    assert parse_entry(sample) == (ip, ts, req)
+    assert parse_entry_re(sample) == (ip, ts, req)
 
     logs = []
 
     with open(logfile, 'r') as f:
         while True:
-            line = f.readline().strip()
-            if not line:
+            single_entry = f.readline().strip()
+            if not single_entry:
                 break
-            # print(line)
-            ip_address, timestamp, request = parse_entry(line)
+            ip_address, timestamp, request = parse_entry(single_entry)
             entry = {'ip_address': ip_address, 'timestamp': timestamp, 'request': request}
-            print(entry)
             logs.append(entry)
-    print(len(logs))
-    print(logs[2])
+
+    print(logs)
